@@ -1,8 +1,10 @@
 #!/bin/sh
-true > blocked.conf
+rm blocked*.conf
 
 cat domains.nkrz|uniq| while read hosts
 do
-	echo "zone $hosts {type master; file \"blocked/block\"; };" >> blocked.conf
+	echo "zone $hosts {type master; file \"/etc/bind/blocked/block\"; };" >> blocked_linux.conf
+        echo "zone $hosts {type master; file \"/etc/namedb/blocked/block\"; };" >> blocked_bsd.conf
+
 done
 
